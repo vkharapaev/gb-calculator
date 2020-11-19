@@ -5,6 +5,9 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModel;
 import javacore.advanced.hw4.task2.android.expression.Exp;
 import javacore.advanced.hw4.task2.android.expression.InfixExpCreator;
 import javacore.advanced.hw4.task2.android.number.NumCreator;
@@ -15,7 +18,7 @@ import static javacore.advanced.hw4.task2.android.expression.ExpUtil.isRightBrac
 import static javacore.advanced.hw4.task2.android.number.NumUtil.isDigit;
 import static javacore.advanced.hw4.task2.android.number.NumUtil.isDot;
 
-public class CalcPresenter implements CalcContract.Presenter {
+public class CalcPresenter extends ViewModel implements CalcContract.Presenter {
 
     private static final String OPERATION_EQ = "=";
     private static final String OPERATION_DEL = "<";
@@ -34,6 +37,14 @@ public class CalcPresenter implements CalcContract.Presenter {
     @Override
     public void takeView(CalcContract.View view) {
         this.view = view;
+
+        view.showExpression(expCreator.toString());
+        view.show(numCreator.toString());
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private void onDestory() {
+        view = null;
     }
 
     @Override
@@ -81,4 +92,5 @@ public class CalcPresenter implements CalcContract.Presenter {
         numberFormat.setGroupingUsed(false);
         return numberFormat.format(num);
     }
+
 }

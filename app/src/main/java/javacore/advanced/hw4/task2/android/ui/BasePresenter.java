@@ -1,6 +1,8 @@
 package javacore.advanced.hw4.task2.android.ui;
 
-public interface BasePresenter<T> {
+import androidx.lifecycle.LifecycleObserver;
+
+public interface BasePresenter<T> extends LifecycleObserver {
 
     /**
      * Set a view to a presenter

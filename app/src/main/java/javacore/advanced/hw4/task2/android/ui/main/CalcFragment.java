@@ -9,7 +9,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import javacore.advanced.hw4.task2.android.databinding.FragmentCalcBinding;
+import javacore.advanced.hw4.task2.android.ui.ViewModelFactory;
 
 public class CalcFragment extends Fragment implements CalcContract.View {
 
@@ -34,6 +36,9 @@ public class CalcFragment extends Fragment implements CalcContract.View {
         super.onViewCreated(view, savedInstanceState);
         setUpWidgets();
 
+        presenter = new ViewModelProvider(requireActivity(), new ViewModelFactory()).get(CalcPresenter.class);
+
+        getLifecycle().addObserver(presenter);
         presenter.takeView(this);
     }
 
