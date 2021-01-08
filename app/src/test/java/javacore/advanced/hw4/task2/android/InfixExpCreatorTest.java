@@ -44,20 +44,20 @@ public class InfixExpCreatorTest {
     }
 
     @Test
-    public void emptyExpToString () {
+    public void emptyExpToString() {
         InfixExpCreator creator = new InfixExpCreator();
         assertEquals("", creator.toString());
     }
 
     @Test
-    public void addDecimal () {
+    public void addDecimal() {
         InfixExpCreator creator = new InfixExpCreator();
         creator.add("0.5");
         assertEquals("0.5", creator.toString());
     }
 
     @Test
-    public void removeLeftBrackets () {
+    public void removeLeftBrackets() {
         InfixExpCreator creator = new InfixExpCreator();
         creator.add("5").add("+").add("(").add("(").add("(").add("(").add("(");
         assertEquals("5", creator.toFinalizedString());

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import javacore.advanced.hw4.task2.android.databinding.FragmentCalcBinding;
 import javacore.advanced.hw4.task2.android.ui.ViewModelFactory;
 
@@ -21,7 +22,6 @@ public class CalcFragment extends Fragment implements CalcContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new CalcPresenter();
     }
 
     @Override
@@ -47,7 +47,15 @@ public class CalcFragment extends Fragment implements CalcContract.View {
             View child = binding.getRoot().getChildAt(i);
             if (child instanceof Button) {
                 Button button = (Button) child;
-                button.setOnClickListener((view) -> presenter.process(button.getText().toString()));
+                String text = button.getText().toString();
+                if (text.equals("()")) {
+                    button.setOnClickListener((view) -> {
+                        presenter.process(")");
+                        presenter.process("(");
+                    });
+                } else {
+                    button.setOnClickListener((view) -> presenter.process(text));
+                }
             }
         }
     }

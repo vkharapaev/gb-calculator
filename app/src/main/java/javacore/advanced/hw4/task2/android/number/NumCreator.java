@@ -13,7 +13,6 @@ public class NumCreator {
     private final LinkedList<String> number;
 
     private boolean dot;
-    private boolean minus;
 
     public NumCreator() {
         number = new LinkedList<>();
@@ -39,9 +38,8 @@ public class NumCreator {
     }
 
     private void addMinus() {
-        if (!minus && isEmpty()) {
+        if (isEmpty()) {
             addToken(MINUS);
-            minus = true;
         }
     }
 
@@ -54,9 +52,6 @@ public class NumCreator {
 
         } else if (isDot(last)) {
             dot = false;
-
-        } else if (isMinus(last)) {
-            minus = false;
         }
     }
 
@@ -89,7 +84,7 @@ public class NumCreator {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        number.forEach(sb::append);
+        number.stream().forEach(sb::append);
         return sb.toString();
     }
 
@@ -98,8 +93,15 @@ public class NumCreator {
      */
     public void clear() {
         dot = false;
-        minus = false;
         number.clear();
+    }
+
+    public void changeSign() {
+        if (number.isEmpty() || !number.get(0).equals(MINUS)) {
+            number.add(0, MINUS);
+        } else {
+            number.remove(0);
+        }
     }
 
     /**

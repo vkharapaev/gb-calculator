@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -8,6 +8,17 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <item name="materialButtonStyle">@style/AppButtonStyle</item>
+    </style>
+
+    <style name="AppButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="shapeAppearanceOverlay">@style/AppShapeAppearance</item>
+    </style>
+    
+    <style name="AppShapeAppearance">
+        <item name="cornerSize">30dp</item>
     </style>
 
 </resources>
